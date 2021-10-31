@@ -1,8 +1,4 @@
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
+import mailConfig from '../../config/mail';
 
-import mailConfig from '../../config/mailConfig'
-
-
-// creating a module to use the lib
-
-export default nodemailer.createTransport(mailConfig)
+export default nodemailer.createTransport(mailConfig);

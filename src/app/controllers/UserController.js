@@ -1,29 +1,20 @@
+import Queue from '../lib/Queue';
 
 export default {
-  async store(request, response){
-    const {name, email, password} = request.body
+  async store(req, res) {
+    const { name, email, password } = req.body;
 
-
-    // response object
     const user = {
       name,
       email,
-      password
-    }
+      password,
+    };
 
+    // Adicionar job RegistrationMail na fila
+    await Queue.add('RegistrationMail', { user });
 
-    // sending an email by using the lib, and the fake smtp server
+    await Queue.add('UserReport', { user });
 
-    // await makes it stop until the mail is send, then it returns something
-
-
-    
-   
-
-
-  
-    // to send the json response
-
-    return response.json(user)
+    return res.json(user);
   }
-}
+};
